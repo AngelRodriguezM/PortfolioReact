@@ -1,0 +1,24 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --blanco: #f0f0f0;
+  --primarioOscuro: #0d1117;
+  --secundario: #c31432;
+  --highlight: rgba(255, 255, 255, 0.08);
+  --shadow-s: rgba(195, 20, 50, 0.4);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--primarioOscuro);
+  color: var(--blanco);
+}
