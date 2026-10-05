@@ -11,6 +11,13 @@
   --font-heading: "DM Sans", sans-serif;
   --animate-pulse-glow: pulse-glow 2.5s infinite;
   --animate-pop-in: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  --animate-spin-angle: spin-angle 3s linear infinite;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }
 
 @keyframes pulse-glow {
@@ -23,6 +30,11 @@
   0% { opacity: 0; transform: scale(0.7); }
   60% { opacity: 1; transform: scale(1.1); }
   100% { opacity: 1; transform: scale(1);}
+}
+
+@keyframes spin-angle {
+  from { --angle: 0deg; }
+  to { --angle: 360deg; }
 }
 
 :root {
@@ -38,14 +50,17 @@
     --angle: 0deg;
     --primarioLighter: #3b3b3b;
     --shadow-s: rgba(0,0,0,0.1);
+    --gray-100: #474747;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
 body {
@@ -54,6 +69,14 @@ body {
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
   }
@@ -61,4 +84,9 @@ body {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.5rem; }
   h3 { font-size: 1.17rem; }
+}
+
+.Pagesection {
+  padding: 5rem;
+  
 }

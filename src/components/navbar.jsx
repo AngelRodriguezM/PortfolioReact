@@ -15,15 +15,15 @@ export default function NavBar(){
   return (
     <>
       <div className="navbar">
-        <NavLink to="/" className="navbarBtnImg" onClick={closeMenu}>
-          <img src={pfp} alt="pfp" />
+        <NavLink to="/#main" className="navbarBtnImg" onClick={closeMenu}>
+          <img src={pfp} alt="Home" />
         </NavLink>
 
         <div className="hamburgerBtn" onClick={toggleMenu} >
           <span className="material-symbols-outlined">menu</span>
         </div>
         <div className={"navBtns" + (isOpen ? " active" : "")}>
-            <NavLink to="/" className="navbarBtn" onClick={closeMenu}>
+            <NavLink to="/#about" className="navbarBtn" onClick={closeMenu}>
             About
             </NavLink>
 
