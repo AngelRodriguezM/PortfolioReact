@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const glass = `bg-highlight backdrop-blur-[20px] border border-secundario shadow-[0_0_5px_var(--color-secundario)] rounded-[12px] md:rounded-[15px] `
+const glass = `bg-glass backdrop-blur-[20px] border border-accent shadow-card rounded-[12px] md:rounded-[15px]`
 
 function ProjectFeature({ project }) {
     const { title, image, imageAlt, description = [], links = [] } = project
@@ -22,7 +22,7 @@ function ProjectFeature({ project }) {
             <div className={`${glass} p-8 max-[576px]:p-5 md:justify-self-stretch leading-[1.75] max-[576px]:text-[0.98rem]`}>
                 <h3 className="font-heading  text-[1.5rem] max-[576px]:text-[1.25rem] mb-4">{title}</h3>
                 {description.map((paragraph) => (
-                    <p key={paragraph} className="mb-4 text-blanco/80">{paragraph}</p>
+                    <p key={paragraph} className="mb-4 text-ink-muted">{paragraph}</p>
                 ))}
                 {links.map((link) => (
                     <a
@@ -30,7 +30,7 @@ function ProjectFeature({ project }) {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block underline text-blanco hover:text-secundario transition-colors duration-300"
+                        className="block underline text-ink hover:text-accent-text transition-colors duration-300"
                     >
                         {link.label}
                     </a>

@@ -120,7 +120,7 @@ function ProjectModal({ project, originRect, getCardRect, onCloseStart, onClosed
             <div
                 aria-hidden="true"
                 onClick={close}
-                className="absolute inset-0 bg-black/60"
+                className="absolute inset-0 bg-ink/5"
                 style={{
                     opacity: isOpen ? 1 : 0,
                     transition: `opacity ${duration}ms ease`,
@@ -134,12 +134,12 @@ function ProjectModal({ project, originRect, getCardRect, onCloseStart, onClosed
                 onTransitionEnd={(e) => {
                     if (isClosing && e.target === e.currentTarget && e.propertyName === 'width') finish()
                 }}
-                className="absolute rounded-[15px] backdrop-blur-[20px] border-solid border-secundario
-                shadow-[0_0_15px_var(--color-secundario)] overflow-hidden"
+                className="absolute rounded-[15px] backdrop-blur-[20px] border-solid border-accent
+                shadow-card-hover overflow-hidden"
                 style={{
                     ...box,
                     // Starts (and ends) looking like the card, then settles into the dark window
-                    backgroundColor: isOpen ? 'var(--highlight)' : 'var(--highlight)',
+                    backgroundColor: isOpen ? 'var(--color-glass)' : 'var(--color-glass)',
                     borderWidth: isOpen ? '1px' : '3px 0',
                     // Fade out over the last moments of the shrink while the card fades in beneath
                     opacity: isClosing ? 0 : 1,
@@ -163,8 +163,8 @@ function ProjectModal({ project, originRect, getCardRect, onCloseStart, onClosed
                         type="button"
                         onClick={close}
                         aria-label="Close project details"
-                        className="absolute top-3 right-3 flex items-center justify-center w-10 h-10 rounded-full text-blanco bg-highlight
-                        hover:text-secundario transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-secundario"
+                        className="absolute top-3 right-3 flex items-center justify-center w-10 h-10 rounded-full text-ink bg-accent-tint
+                        hover:text-accent-text transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent"
                     >
                         <FaXmark aria-hidden="true" />
                     </button>
@@ -180,7 +180,7 @@ function ProjectModal({ project, originRect, getCardRect, onCloseStart, onClosed
                                 {title}
                             </h2>
                             {description.map((paragraph) => (
-                                <p key={paragraph} className="mb-4 text-blanco/80">{paragraph}</p>
+                                <p key={paragraph} className="mb-4 text-ink-muted">{paragraph}</p>
                             ))}
                             {links.map((link) => (
                                 <a
@@ -188,7 +188,7 @@ function ProjectModal({ project, originRect, getCardRect, onCloseStart, onClosed
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block underline text-blanco hover:text-secundario transition-colors duration-300"
+                                    className="block underline text-ink hover:text-accent-text transition-colors duration-300"
                                 >
                                     {link.label}
                                 </a>

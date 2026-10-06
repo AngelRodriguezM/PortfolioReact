@@ -95,7 +95,7 @@ Preserve external destinations exactly:
 - Tetris Project Link: https://github.com/AngelRodriguezM/TetrisJavaScript
 - Web design Certificate Link: https://www.freecodecamp.org/certification/angelrodrigu3z/responsive-web-design
 
-The homepage uses `Elgato.jpg` for the navigation avatar, About image, and CV image; retain it as the original visual choice, without describing it as a human portrait. Use `Globe.gif` in the hero and `AngelIcon.png` as favicon. The repository also contains `docs/other/Angel RodriguezM CV_English (1).pdf`; an optional download link may reference this actual file, but the existing CV page is an HTML presentation and has no download link. Do not assume the PDF's contents match the HTML without checking it.
+The homepage uses `Elgato.jpg` for the navigation avatar, About image, and CV image; retain it as the original visual choice, without describing it as a human portrait. The hero uses the `HeroTiles` SVG illustration (the original `Globe.gif` was removed); `AngelIcon.png` is the favicon. The repository also contains `docs/other/Angel RodriguezM CV_English (1).pdf`; an optional download link may reference this actual file, but the existing CV page is an HTML presentation and has no download link. Do not assume the PDF's contents match the HTML without checking it.
 
 Copy source assets into `public/assets/` or import them from `src/assets/`. Preserve case, map names with spaces carefully, and use one asset mapping. Do not generate substitutes when original assets exist. Add descriptive alt text to meaningful screenshots and certificates; decorative imagery can use empty alt text. Preserve aspect ratios, use `object-fit: contain` for certificates where cropping would hide information, and reserve image space to prevent layout shifts.
 
@@ -105,21 +105,32 @@ Use hand-authored CSS with shared custom properties. Do not let a component libr
 
 ### Design tokens
 
-```css
-:root {
-  --primario: #1a1a1a;
-  --secundario: #db0303;
-  --blanco: #ffffff;
-  --primarioOscuro: #111111;
-  --primarioLighter: #3b3b3b;
-  --highlight: rgba(255, 255, 255, 0.1);
-  --shadow-s: rgba(0, 0, 0, 0.1);
-  --angle: 0deg;
-}
-```
+**The palette is light-only** (it replaced the original dark palette). No dark values, theme toggle, `prefers-color-scheme` rules or `dark:` classes. Tokens live in the `@theme` block of `src/index.css` and become Tailwind utilities (`bg-surface`, `text-ink`, `border-accent`, `shadow-card`, …) and CSS variables (`var(--color-accent)`).
 
-- Body background: `#111111`; white text. Hero background: black.
-- Red is the primary accent for borders, highlights, glows, and small hero text.
+| Token | Value | Use |
+| --- | --- | --- |
+| `surface` | `#f7f4f0` | Page background, hero, navbar |
+| `surface-raised` | `#ffffff` | Content boxes, modal window, white hero tiles |
+| `surface-sunken` | `#f2ede8` | About section band (behind the ASCII field) |
+| `ink` | `#1a1a1a` | Headings and body text |
+| `ink-muted` | `#57524d` | Paragraphs in boxes, panels and modals; subtitles |
+| `ink-subtle` | `#8a847e` | Idle card titles and icons only (never body text) |
+| `accent` | `#db0303` | Brand red: glows, borders, focus, navbar rule, solid fills, large text |
+| `accent-deep` | `#c31432` | Nav hover bubble, pressed fills, About ring |
+| `accent-text` | `#c31432` | Red text at body size |
+| `accent-tint` | `#fde8e6` | Soft red hover wash |
+| `on-accent` | `#ffffff` | Text on `accent` / `accent-deep` |
+| `glass` | `rgba(255,255,255,.72)` | Frosted fill (with backdrop blur) |
+| `glass-edge` | `rgba(255,255,255,.95)` | Top/bottom borders on glass |
+| `gloss` | `rgba(255,255,255,.85)` | Shine on the top half of cards and pills |
+| `line` / `line-strong` | `#e4ddd6` / `#cfc6bd` | Hairlines / control borders |
+| `ring-teal` | `#659999` | Second colour of the About photo ring |
+
+Shadows: `shadow-card` and `shadow-card-hover` (soft red halos replacing the old `0 0 5px` red glows), `shadow-active` (current nav pill), `shadow-lift` (nav pill hover), `shadow-navbar`.
+
+- Page background `surface`; `ink` text. Red is used sparingly for glows, borders, focus rings, the active state and solid fills.
+- Project cards are white frosted glass with a gloss sheen on the top half and a soft red halo (modelled on Wii U menu tiles).
+- Motion, easing curves, durations, keyframes and layout are unchanged from the original; the light palette changed colour, borders, shadows and the hero illustration only.
 - **DM Sans** for body text, navigation, project titles, and detail headings. The source loads weight 200; load additional weights only where needed for faithful rendering.
 - **Oswald** for major headings, particularly the oversized name and About heading.
 - **Ballet** cursive for the word Angel in the dedicated About page's “Who Is Angel” heading. Scope this effect to that word, not all spans.
@@ -129,21 +140,21 @@ Use hand-authored CSS with shared custom properties. Do not let a component libr
 
 ### Layout specifications
 
-**Navigation:** full-width sticky bar at top, z-index 10, four equally spaced columns, approximately `1rem 2rem` homepage padding. Dark surface, source opacity 0.95, subtle backdrop blur, `0 2px 10px rgba(0,0,0,.5)` shadow, 2px red bottom border. Avatar is 45×45px. Pills use `.5rem 1rem` padding, 1.2rem text, translucent fill, 20px backdrop blur, and 2px translucent top/bottom borders.
+**Navigation:** full-width sticky bar at top, z-index 10, four equally spaced columns, approximately `1rem 2rem` homepage padding. `surface` background, opacity 0.95, subtle backdrop blur, `shadow-navbar`, 2px solid `accent` bottom border. Avatar is 45×45px. Pills use `.5rem 1rem` padding, 1.2rem text, translucent fill, 20px backdrop blur, and 2px translucent top/bottom borders.
 
-**Hero:** two equal columns with centered items; source padding `10% 0 10% 2%`, gap 2vh. Name uses Oswald, 15vh, line-height 1. Junior Developer uses 4vh, 5px letter spacing, dark fill, and a white `-webkit-text-stroke` of .35px. Software Engineering Student uses 2vh and red. Globe filter is `saturate(300%) hue-rotate(250deg) contrast(7777%)`; retain the stylized look initially and compare against the source before adjusting. Use `clamp()` and width constraints to prevent text overflow while preserving the scale.
+**Hero:** two equal columns with centered items; source padding `10% 0 10% 2%`, gap 2vh. Name uses Oswald, 15vh, line-height 1. Junior Developer uses 4vh, 5px letter spacing, `surface` fill, and an `ink` `-webkit-text-stroke` of .5px (.6px from md). Software Engineering Student uses 2vh and `accent-text`. The right column is `HeroTiles` (`src/components/HeroTiles.jsx`): an inline SVG 5×3 grid of 72px rounded tiles (16px gaps, 15px radius) with one red 2×2 tile with gloss, tiles popping in with a stagger, a pulsing red glow behind the big tile, and a bounce on tile hover. Use `clamp()` and width constraints to prevent text overflow while preserving the scale.
 
-**Homepage About:** outer charcoal section with 5% padding; inner panel max-width 1000px, 15px radius, dark background, 2px red border, two columns, 2vh gap, and 5% padding. Left: linked “About Me” heading, 5rem with 2.5px spacing. Right: circular 180px cat image linking to About.
+**Homepage About:** outer `surface-sunken` section with 5% padding and the animated ASCII field (`AsciiBackground`) behind it; inner panel max-width 1000px, 15px radius, `surface-raised` background, 2px `accent` border, two columns, 2vh gap, and 5% padding. Left: linked “About Me” heading, 5rem with 2.5px spacing. Right: circular 180px cat image linking to About.
 
 **Projects:** centered DM Sans section heading with 2.5px spacing. Wrapper has two columns, 2vh gap, and source padding `5% 10% 10% 10%`. Cards occupy successive rows alternating left/right: left row 1, right row 2, left row 3, right row 4, left row 5. Do not compress them into a conventional tightly packed grid without instruction. Resting cards are 200×200px, 15px radius, translucent background, 150px backdrop blur, red `0 0 5px` shadow, and 3px translucent top/bottom borders. Center icon and title; title is 1.25rem with 2px spacing, opacity .5; icon is 4rem with opacity .7. Images start hidden, then reveal during interaction.
 
 **Homepage CV:** centered 350×500px outer card with conic red/magenta border and 15px radius. Inner dark card has 10px radius, translucent top border, approximately 10% padding, and vertically spaced avatar and underlined My CV link. Inner avatar/link panels have translucent fill, soft shadows, and lighter hover surfaces.
 
-**Dedicated About:** max-width 1000px charcoal panel, 15px radius, translucent top border, subtle shadow, two columns, source padding `12% 5%`. Heading 5rem; biography 1.15rem, line-height 1.5, justified in source. Red highlight on “software engineering student.” On narrow screens prefer left-aligned paragraphs if justification creates uneven spacing.
+**Dedicated About:** max-width 1000px `surface-raised` panel, 15px radius, `line` top border, subtle shadow, two columns, source padding `12% 5%`. Heading 5rem; biography 1.15rem, line-height 1.5, justified in source. Red highlight on “software engineering student.” On narrow screens prefer left-aligned paragraphs if justification creates uneven spacing.
 
 **Project details:** two-column grid, 5vh gap, outer padding 5%. Text panel on right spanning the two media rows; two image/resource panels on left. Text panel has source width 400px, 2rem padding, translucent fill, 20px backdrop blur, 1px white border, 15px radius. Media panels use the same surface/border treatment, roughly 5% padding. Images have 10px radius and source max-width 250px; preserve readability on small screens. Detail text uses line-height 1.75. Resource links are underlined, white by default and red on hover.
 
-**CV page:** grid width 75%, two columns; image and Skills share the first row, Work and Studies each span both columns. Info panels use charcoal/translucent surfaces, 15px radius, 2rem padding, translucent top border, and lighter hover state. Retain the full lists.
+**CV page:** grid width 75%, two columns; image and Skills share the first row, Work and Studies each span both columns. Info panels use `surface-raised`/glass surfaces, 15px radius, 2rem padding, `line` top border, and an `accent-tint` hover state. Retain the full lists.
 
 ## Animations and interaction contract
 
@@ -186,14 +197,14 @@ Place gradient/glow pseudo-elements on positioned wrappers with intentional stac
 
 The homepage defines a navigation glow pseudo-element but does not activate its opacity on hover; the detail stylesheet does. The homepage also attempts a pseudo-element on an `img`, which is not a reliable rendered effect. Preserve confirmed effects; any added homepage glow is an intentional enhancement, not an observed animation.
 
-The animated Globe GIF is a separate asset, not a CSS spin effect. Do not add unrequested scroll reveals, page transitions, typing effects, particles, or parallax.
+Do not add unrequested scroll reveals, page transitions, typing effects, particles, or parallax.
 
 ### Accessibility and motion improvements
 
 - Apply comparable card reveals and nav feedback through `:focus-visible` or `:focus-within`, with a clear focus outline. Use one semantic link per project card, covering its usable area.
 - Essential titles, routes, and information must remain available without hover. On `hover: none` / coarse pointers, show useful card imagery by default and keep stable card geometry. Do not require a first tap solely to expose a link.
 - The source disables detail-card 3D effects on devices without hover; preserve that rule.
-- Add `prefers-reduced-motion: reduce`: stop gradient rotation, pulsing, bounces, tilts, and scale transitions; use immediate state changes and normal scrolling. Supply a static globe image for reduced motion; disabling CSS does not stop an animated GIF.
+- Add `prefers-reduced-motion: reduce`: stop gradient rotation, pulsing, bounces, tilts, and scale transitions; use immediate state changes and normal scrolling. Hero tiles and the ASCII field must not animate under reduced motion.
 - Preserve desktop expansion where practical, but prevent overlaps and horizontal scrolling. If intrinsic size animation causes disruptive reflow, use reserved interaction space or a restrained transform with equivalent visual emphasis; record any visual deviation.
 - Limit transitioned properties rather than copying `transition: all`; avoid expensive animated blur. Keep glows decorative and behind readable content.
 - Add `scroll-margin-top` to anchored sections so the sticky navbar does not cover headings.
@@ -202,7 +213,7 @@ The animated Globe GIF is a separate asset, not a CSS spin effect. Do not add un
 
 Source breakpoints include 900, 768, 600, 576, 426/425, 420, 400, and 320px. Consolidate overlapping rules only when the resulting layout stays faithful.
 
-- At ≤768px: hero, homepage About, projects, project details, and CV become single-column layouts. Navigation stays a compact four-item row and shows icons above labels; pill text becomes .75rem. Hero name is about 10vh, globe width 150px. Homepage About heading is 3rem.
+- At ≤768px: hero, homepage About, projects, project details, and CV become single-column layouts. Navigation stays a compact four-item row and shows icons above labels; pill text becomes .75rem. Hero name is about 10vh, hero tiles max width 280px. Homepage About heading is 3rem.
 - Mobile project cards use 150×150px resting size, .8rem title, 3rem icon, and 20px gaps. Original hover uses width 45% and `scale(1.15,1.05)`; adapt this to safe touch behavior instead of reproducing overflow.
 - At ≤425px: hero source sizes become 8vh, 2.5vh, and 1.5vh. Use accessible minimum text sizes while retaining the hierarchy.
 - Homepage CV border card shrinks to 200×350px around ≤426px with 2% border padding.
@@ -279,6 +290,6 @@ Do not reproduce these implementation defects:
 5. Run the configured build, type checks, and lint checks. Manually verify every route, image, anchor, external link, keyboard interaction, and responsive layout.
 6. Compare the original and React versions at matching viewport sizes, in resting and hovered states. Check gradient borders over time and project image/icon transitions. Report any intentional deviations.
 
-Finished means: all five projects and the complete biography/CV are present; original project order is intact; dark/red identity, typography, staggered cards, globe, glows, rotating borders, and media tilts are recognizable; internal navigation and assets work after deployment; touch and keyboard access do not depend on hover; reduced motion is respected; and the production build succeeds.
+Finished means: all five projects and the complete biography/CV are present; original project order is intact; light/red identity, typography, staggered cards, hero tiles, glows, rotating borders, and media tilts are recognizable; internal navigation and assets work after deployment; touch and keyboard access do not depend on hover; reduced motion is respected; and the production build succeeds.
 
 Do not deploy or change the source repository as part of merely preparing this guide. When later asked to implement the recreation, deliver the working React app and explain what changed, how it was checked, and any remaining limitations.

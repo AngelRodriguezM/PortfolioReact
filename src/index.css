@@ -1,13 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primario: var(--primario);
-  --color-secundario: var(--secundario);
-  --color-blanco: var(--blanco);
-  --color-primario-oscuro: var(--primarioOscuro);
-  --color-highlight: var(--highlight);
-  --color-primario-lighter: var(--primarioLighter);
-  --color-shadow-s: var(--shadow-s);
+  --color-surface: #f7f4f0;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #f2ede8;
+  --color-ink: #1a1a1a;
+  --color-ink-muted: #57524d;
+  --color-ink-subtle: #8a847e;
+  --color-accent: #db0303;
+  --color-accent-deep: #c31432;
+  --color-accent-text: #c31432;
+  --color-accent-tint: #fde8e6;
+  --color-on-accent: #ffffff;
+  --color-glass: rgba(255, 255, 255, 0.02);
+  --color-glass-edge: rgba(255, 255, 255, 0.95);
+  --color-gloss: rgba(255, 255, 255, 0.85);
+  --color-line: #e4ddd6;
+  --color-line-strong: #cfc6bd;
+  --color-ring-teal: #659999;
+
+  --shadow-card: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(219,3,3,0.18), 0 4px 14px rgba(219,3,3,0.14);
+  --shadow-card-hover: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(219,3,3,0.35), 0 12px 28px rgba(219,3,3,0.24);
+  --shadow-active: 0 1px 14px 2px rgba(219,3,3,0.35);
+  --shadow-lift: 0 1px 20px 7px rgba(26,26,26,0.08);
+  --shadow-navbar: 0 2px 10px rgba(26,26,26,0.08);
+
   --font-heading: "DM Sans", sans-serif;
   --animate-pulse-glow: pulse-glow 2.5s infinite;
   --animate-pop-in: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
@@ -41,16 +58,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-    --primario: #1a1a1a;
-    --secundario: #db0303;
-    --blanco: #ffffff;
-    --primarioOscuro: #111111;
-    --highlight: rgba(255,255,255,0.1);
-    --angle: 0deg;
-    --primarioLighter: #3b3b3b;
-    --shadow-s: rgba(0,0,0,0.1);
-    --gray-100: #474747;
+  color-scheme: light;
+  --angle: 0deg;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -64,8 +73,8 @@ section[id] {
 }
 
 body {
-  background-color: var(--primarioOscuro);
-  color: var(--blanco);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
 }
 
 @layer base {

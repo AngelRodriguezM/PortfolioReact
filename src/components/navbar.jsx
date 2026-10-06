@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './css/navbar.css'
 import { NavLink } from "react-router";
+import { FaBars } from "react-icons/fa6";
 import pfp from '../Images/Elgato.jpg';
 
 export default function NavBar(){
@@ -19,9 +20,15 @@ export default function NavBar(){
           <img src={pfp} alt="Home" />
         </NavLink>
 
-        <div className="hamburgerBtn" onClick={toggleMenu} >
-          <span className="material-symbols-outlined">menu</span>
-        </div>
+        <button
+          type="button"
+          className="hamburgerBtn"
+          onClick={toggleMenu}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+        >
+          <FaBars aria-hidden="true" />
+        </button>
         <div className={"navBtns" + (isOpen ? " active" : "")}>
             <NavLink to="/#about" className="navbarBtn" onClick={closeMenu}>
             About
