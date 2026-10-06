@@ -1,11 +1,13 @@
 import { Link } from 'react-router'
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
+import AsciiBackground from './AsciiBackground'
 import ContentBox from "./UI components/contentBox"
 import pfp from '../Images/Elgato.jpg'
 
 function About() {
     return (
-        <section id="about" className="bg-primario flex items-center justify-center p-[5%]">
+        <section id="about" className="relative isolate overflow-hidden bg-primario flex items-center justify-center p-[5%]">
+            <AsciiBackground />
             <ContentBox className="grid grid-cols-1 md:grid-cols-2 gap-[5vh] md:gap-[2vh] items-center !p-[5%]">
                 <div className="flex flex-col gap-4 text-center md:text-left">
                 <h2>
@@ -18,7 +20,7 @@ function About() {
                     </Link>
                 </h2>
                 <p className="text-blanco/70 leading-relaxed">
-                    A software engineering student who turns ideas into clean, usable web apps and small AI tools.
+                    A software engineering student who turns ideas into clean, usable web apps and small AI tools with the belief that UI should not only be good looking but fun
                 </p>
                 </div>
 

@@ -3,6 +3,7 @@ import ProjectCard from "../components/ProjectCard"
 import ProjectModal from "../components/ProjectModal"
 import { DURATION, FADE, prefersReducedMotion } from "../components/modalTiming"
 import projectsData from "../data/projectsData"
+import AsciiBackground from "../components/AsciiBackground"
 
 const gridPlacement = [
     '',
@@ -36,6 +37,7 @@ function Projects() {
 
     return (
         <section id="projects">
+            
             <h1 className="font-heading tracking-[2.5px] text-center pt-[5%]">Projects &amp; Skills</h1>
 
             <div className="projectsGrid grid grid-cols-1 md:grid-cols-2 justify-items-center gap-5 md:gap-[2vh] px-[5%] md:px-[10%] pt-[5%] pb-[10%]">

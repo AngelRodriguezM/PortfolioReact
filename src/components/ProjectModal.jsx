@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { FaXmark } from 'react-icons/fa6'
 import { DURATION, FADE, prefersReducedMotion } from './modalTiming'
 
-const EASE = 'cubic-bezier(0.42,0,0.15,1.32)'
+const EASE = 'cubic-bezier(1, 0.04, 0, 1.29)'
 // Same curve without the overshoot, used when closing
-const EASE_CLOSE = 'cubic-bezier(0.42,0,0.15,1)'
+const EASE_CLOSE = 'cubic-bezier(1, 0.04, 0, 1)'
 
 const toBox = (r) => ({ top: r.top, left: r.left, width: r.width, height: r.height })
 

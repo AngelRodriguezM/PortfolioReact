@@ -6,7 +6,7 @@ function ProjectFeature({ project }) {
     const { title, image, imageAlt, description = [], links = [] } = project
 
     return (
-        <article className="grid  grid-cols-1 md:grid-cols-[auto_1fr] gap-[5vh] items-center justify-items-center max-w-[1000px] mx-auto">
+        <article className="grid  grid-cols-1 md:grid-cols-[auto_1fr] gap-[5vh] items-center justify-items-center max-w-[1200px] mx-auto w-full">
             <div
                 className={`${glass} p-[5%] md:p-8 transition-transform duration-300 ease-[cubic-bezier(0.44,0,0,1.44)]
                 hover:[transform:perspective(600px)_rotateY(20deg)_scale(1.05)] motion-reduce:transition-none motion-reduce:hover:transform-none`}
@@ -19,7 +19,7 @@ function ProjectFeature({ project }) {
                 />
             </div>
 
-            <div className={`${glass} p-8 max-[576px]:p-5 md:w-[400px] leading-[1.75] max-[576px]:text-[0.98rem]`}>
+            <div className={`${glass} p-8 max-[576px]:p-5 md:justify-self-stretch leading-[1.75] max-[576px]:text-[0.98rem]`}>
                 <h3 className="font-heading  text-[1.5rem] max-[576px]:text-[1.25rem] mb-4">{title}</h3>
                 {description.map((paragraph) => (
                     <p key={paragraph} className="mb-4 text-blanco/80">{paragraph}</p>
